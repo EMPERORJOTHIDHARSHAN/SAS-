@@ -1,0 +1,6 @@
+{
+  "name": "SaaS Inventory Manager",
+  "description": "A comprehensive inventory management SaaS platform for small businesses featuring real-time tracking, stock alerts, analytics, supplier orders, and AI-powered product description and restock recommendations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,262 @@
+import { Product, Supplier, PurchaseOrder, InventoryTransaction } from './types';
+
+export const INITIAL_SUPPLIERS: Supplier[] = [
+  {
+    id: 'sup-1',
+    name: 'Global Tech Distributors',
+    contactName: 'Sarah Jenkins',
+    email: 'sjenkins@globaltech.com',
+    phone: '+1 (555) 019-2834',
+    address: '101 Industrial Pkwy, San Jose, CA 95112',
+  },
+  {
+    id: 'sup-2',
+    name: 'Artisan Gourmet Co.',
+    contactName: 'Marcus Moretti',
+    email: 'marcus@artisangourmet.com',
+    phone: '+1 (555) 014-9821',
+    address: '42 Roasters Way, Seattle, WA 98101',
+  },
+  {
+    id: 'sup-3',
+    name: 'EcoPack Solutions',
+    contactName: 'Elena Rostova',
+    email: 'elena@ecopack.co',
+    phone: '+1 (555) 017-4433',
+    address: '89 Green Circle Rd, Portland, OR 97205',
+  },
+  {
+    id: 'sup-4',
+    name: 'Northern Woodworks Inc.',
+    contactName: 'David Miller',
+    email: 'd.miller@northernwoodworks.to',
+    phone: '+1 (555) 012-7109',
+    address: '505 Timber Mill Lane, Minneapolis, MN 55413',
+  },
+];
+
+export const INITIAL_PRODUCTS: Product[] = [
+  {
+    id: 'prod-1',
+    name: 'USB-C Multi-dock Hub (9-in-1)',
+    sku: 'EL-USBC-09A',
+    category: 'Electronics',
+    price: 79.99,
+    cost: 32.50,
+    quantity: 4,
+    safetyStock: 15,
+    supplierId: 'sup-1',
+    description: 'Ultra-slim USB-C hub with 4K HDMI, Gigabit Ethernet, 3 USB 3.0 ports, SD/TF card readers, and 100W Power Delivery pass-through. Built from premium sandblasted aluminum.',
+    tags: ['Hub', 'USB-C', 'Office'],
+    lastUpdated: '2026-06-20T14:30:00Z',
+  },
+  {
+    id: 'prod-2',
+    name: 'Wireless Mechanical Keyboard',
+    sku: 'EL-WKB-96X',
+    category: 'Electronics',
+    price: 129.99,
+    cost: 58.00,
+    quantity: 18,
+    safetyStock: 10,
+    supplierId: 'sup-1',
+    description: '96% layout layout mechanical keyboard featuring hot-swappable tactile brown switches, double-shot PBT keycaps, dual-mode 2.4GHz/Bluetooth, and pre-lubed stabilizers.',
+    tags: ['Keyboard', 'Wireless', 'Ergonomic'],
+    lastUpdated: '2026-06-19T11:15:00Z',
+  },
+  {
+    id: 'prod-3',
+    name: 'Single-Origin Ethiopian Coffee (1kg)',
+    sku: 'GF-ETH-COF1',
+    category: 'Gourmet Food',
+    price: 34.50,
+    cost: 14.00,
+    quantity: 45,
+    safetyStock: 20,
+    supplierId: 'sup-2',
+    description: 'Direct trade light-roast whole bean coffee from Yirgacheffe, Ethiopia. Exhibiting floral aromas with clean citrus acidity and distinct notes of jasmine and wild honey.',
+    tags: ['Coffee', 'Arabica', 'Organic'],
+    lastUpdated: '2026-06-20T09:00:00Z',
+  },
+  {
+    id: 'prod-4',
+    name: 'Double-Walled Bamboo Cups (500ct)',
+    sku: 'PKG-DWC-500',
+    category: 'Packaging',
+    price: 89.00,
+    cost: 38.00,
+    quantity: 8,
+    safetyStock: 25,
+    supplierId: 'sup-3',
+    description: 'Fully compostable, double-walled insulating cups crafted from premium organic bamboo fibers. Exceptional heat retention without requiring secondary sleeves.',
+    tags: ['Disposable', 'Eco-Friendly', 'Cups'],
+    lastUpdated: '2026-06-18T16:45:00Z',
+  },
+  {
+    id: 'prod-5',
+    name: 'Handcrafted Oak Tablet Stand',
+    sku: 'WF-OAK-TAB',
+    category: 'Furniture & Decor',
+    price: 49.00,
+    cost: 18.50,
+    quantity: 22,
+    safetyStock: 8,
+    supplierId: 'sup-4',
+    description: 'Solid premium white oak tablet stand designed in a sleek Scandinavian profile. Finished with allergen-safe cold-pressed natural linseed oil and anti-slip silicone feet.',
+    tags: ['Oak', 'Support', 'Minimalist'],
+    lastUpdated: '2026-06-17T10:00:00Z',
+  },
+  {
+    id: 'prod-6',
+    name: 'Biodegradable Paper Straws (1000ct)',
+    sku: 'PKG-BIO-STR',
+    category: 'Packaging',
+    price: 24.99,
+    cost: 9.30,
+    quantity: 60,
+    safetyStock: 30,
+    supplierId: 'sup-3',
+    description: 'High-durability paper straws built using marine-degradable papers and natural plant-based food coloring. Designed to last up to 4 hours in cold liquids without weakening.',
+    tags: ['Straws', 'Eco-Friendly', 'Paper'],
+    lastUpdated: '2026-06-20T15:00:00Z',
+  },
+  {
+    id: 'prod-7',
+    name: 'Ergonomic Walnut Monitor Riser',
+    sku: 'WF-WAL-MNT',
+    category: 'Furniture & Decor',
+    price: 95.00,
+    cost: 41.00,
+    quantity: 2,
+    safetyStock: 5,
+    supplierId: 'sup-4',
+    description: 'Ergonomically engineered monitor stand handcrafted from solid American black walnut. Provides designated storage beneath for slim layouts and laptops.',
+    tags: ['Walnut', 'Ergonomic', 'Office'],
+    lastUpdated: '2026-06-21T02:00:00Z',
+  }
+];
+
+export const INITIAL_TRANSACTIONS: InventoryTransaction[] = [
+  {
+    id: 'tx-1',
+    productId: 'prod-3',
+    productName: 'Single-Origin Ethiopian Coffee (1kg)',
+    productSku: 'GF-ETH-COF1',
+    type: 'INCOMING',
+    quantity: 50,
+    previousQuantity: 5,
+    newQuantity: 55,
+    costOrPrice: 14.00,
+    notes: 'Restocked from recurrent supplier shipment.',
+    timestamp: '2026-06-15T08:30:00Z',
+  },
+  {
+    id: 'tx-2',
+    productId: 'prod-3',
+    productName: 'Single-Origin Ethiopian Coffee (1kg)',
+    productSku: 'GF-ETH-COF1',
+    type: 'SALE',
+    quantity: -10,
+    previousQuantity: 55,
+    newQuantity: 45,
+    costOrPrice: 34.50,
+    notes: 'Corporate catering bulk batch sales order.',
+    timestamp: '2026-06-20T10:15:00Z',
+  },
+  {
+    id: 'tx-3',
+    productId: 'prod-1',
+    productName: 'USB-C Multi-dock Hub (9-in-1)',
+    productSku: 'EL-USBC-09A',
+    type: 'SALE',
+    quantity: -5,
+    previousQuantity: 9,
+    newQuantity: 4,
+    costOrPrice: 79.99,
+    notes: 'Sales order Fulfilled: #10893.',
+    timestamp: '2026-06-20T14:30:00Z',
+  },
+  {
+    id: 'tx-4',
+    productId: 'prod-5',
+    productName: 'Handcrafted Oak Tablet Stand',
+    productSku: 'WF-OAK-TAB',
+    type: 'ADJUSTMENT',
+    quantity: -3,
+    previousQuantity: 25,
+    newQuantity: 22,
+    costOrPrice: 18.50,
+    notes: 'Audit adjustment: damaged items written off.',
+    timestamp: '2026-06-17T10:00:00Z',
+  }
+];
+
+export const INITIAL_POS: PurchaseOrder[] = [
+  {
+    id: 'po-1',
+    poNumber: 'PO-2026-001',
+    supplierId: 'sup-1',
+    supplierName: 'Global Tech Distributors',
+    items: [
+      {
+        productId: 'prod-1',
+        name: 'USB-C Multi-dock Hub (9-in-1)',
+        sku: 'EL-USBC-09A',
+        quantity: 20,
+        cost: 32.50
+      },
+      {
+        productId: 'prod-2',
+        name: 'Wireless Mechanical Keyboard',
+        sku: 'EL-WKB-96X',
+        quantity: 10,
+        cost: 58.00
+      }
+    ],
+    status: 'RECEIVED',
+    totalAmount: 1230.00,
+    createdAt: '2026-06-10T09:00:00Z',
+    sentAt: '2026-06-10T10:00:00Z',
+    receivedAt: '2026-06-15T14:00:00Z',
+    notes: 'Initial launch batch'
+  },
+  {
+    id: 'po-2',
+    poNumber: 'PO-2026-002',
+    supplierId: 'sup-3',
+    supplierName: 'EcoPack Solutions',
+    items: [
+      {
+        productId: 'prod-4',
+        name: 'Double-Walled Bamboo Cups (500ct)',
+        sku: 'PKG-DWC-500',
+        quantity: 50,
+        cost: 38.00
+      }
+    ],
+    status: 'SENT',
+    totalAmount: 1900.00,
+    createdAt: '2026-06-18T11:00:00Z',
+    sentAt: '2026-06-18T13:45:00Z',
+    notes: 'Urgent restocking for summer event planners.'
+  },
+  {
+    id: 'po-3',
+    poNumber: 'PO-2026-003',
+    supplierId: 'sup-4',
+    supplierName: 'Northern Woodworks Inc.',
+    items: [
+      {
+        productId: 'prod-7',
+        name: 'Ergonomic Walnut Monitor Riser',
+        sku: 'WF-WAL-MNT',
+        quantity: 15,
+        cost: 41.00
+      }
+    ],
+    status: 'DRAFT',
+    totalAmount: 615.00,
+    createdAt: '2026-06-20T17:00:00Z',
+    notes: 'Draft order based on high-traffic trends.'
+  }
+];
